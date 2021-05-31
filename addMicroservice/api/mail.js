@@ -5,7 +5,7 @@
 *     Description:             This is the javascript file having source code for sending mail to developer
 *							 
 * *****************************************************************************************************************************/
-var nodemailer = require('nodemailer'); //Nodemailer is a module for Node. js applications to allow easy as cake email sending.
+var nodemailer = require("nodemailer"); //Nodemailer is a module for Node. js applications to allow easy as cake email sending.
 
 
 // Create the transporter with the required configuration for Gmail
@@ -36,14 +36,14 @@ sendMail:function(msg){
   // send mail with defined transport object
   transporter.sendMail(mailOptions, function(error, info){
       if(error){
-         console.log(error);
+         
          return;
       }
 
-      console.log('Message sent: ' + info.response);
+      
       return
   });
   return;
   }
 
-}
+};

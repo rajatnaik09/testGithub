@@ -171,7 +171,7 @@ console.log(inComingMessage);
     console.log(searchTerm);
     const reply = await GET_ASYNC(searchTerm);
     if(reply) {
-        console.log('using cached data');
+        console.log("using cached data");
 		var jsonMessage={
                  "action":"DEVICE_RESTART",
                  "deviceId":inComingMessage.deviceId,
@@ -207,7 +207,7 @@ console.log(inComingMessage);
                             }
 		  publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
 									 const saveResult= await SET_ASYNC(searchTerm,JSON.stringify(JSON.parse(body).clientId),'EX',5);
-						console.log('new data cached',saveResult)
+						console.log("new data cached",saveResult)
                                     //callBack(null,inConnId,jsonMessage) 
                                     return;
                                 }else{

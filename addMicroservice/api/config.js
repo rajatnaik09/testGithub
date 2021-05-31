@@ -7,5 +7,5 @@ module.exports = {
     generalErrorCode:505,
     notFoundErrorCode:404,
     duplicateErrorCode : 409
-}
+};
 

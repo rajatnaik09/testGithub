@@ -6,7 +6,7 @@ const app = express();
 const port = 3013;
 const subscriber1 = redis.createClient();
 const subscriber2 = redis.createClient();
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const controller = require("./api/controller");
 subscriber1.subscribe("add_device");
 
