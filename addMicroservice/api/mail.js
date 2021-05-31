@@ -28,9 +28,9 @@ sendMail:function(msg){
   var mailOptions = {
       from: "smws@project.ortusolis.com", // sender address (who sends)
       to: "rajat.naik@ortusolis.com", // list of receivers (who receives)
-      subject: 'Websocket Server/Gateway Device Error Message', // Subject line
+      subject: "Websocket Server/Gateway Device Error Message", // Subject line
       text: "msg", // plaintext body
-      html: '<p>'+msg+'</p>' // html body
+      html: "<p>"+msg+"</p>" // html body
   };
 
   // send mail with defined transport object

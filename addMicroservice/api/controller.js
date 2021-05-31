@@ -129,7 +129,7 @@ console.log(inComingMessage);
                 });
         }catch(err){
           //  return res.status(500).send("There is a problem in Creating DeviceId Collection"+" "+err);
-
+         console.log(err);
         }
     },
 
@@ -234,24 +234,10 @@ console.log(inComingMessage);
             mailObj.sendMail("Device Id"+" "+inComingMessage.deviceId+"Critical Error Occured while Device Restart"+err.name);
             return;
         }
-    },
-
-
-    insertDeviceId : function (req, res) {
-        try{
-            console.log("++++++++Insert Generated Device Id+++++++++++")
-            WifiReg_DeviceList.updateOne({},
-                {   $push: {
-                        deviceIdList: [ { deviceId: req.body.deviceId, status: req.body.status }]
-                    }
-                }, function (err, resp) {
-                if (err) return res.status(500).send("There was a problem in inserting Device Id in List."+" "+err);
-                res.status(200).send(resp);
-            });
-        }catch(err){
-            return res.status(500).send("There was a problem in inserting Device Id in List."+" "+err);
-        }
     }
+
+
+    
     
 
 };
