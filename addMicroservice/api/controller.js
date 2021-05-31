@@ -1,6 +1,6 @@
 'use strict';
 
-var properties = require("../package.json")
+var properties = require("../package.json");
 var distance = require("../service/distance"); 
 var Request = require("request"); //Request is a simplified HTTP client, used to call Rest API's
 const axios= require("axios");
@@ -48,10 +48,10 @@ var subscriberMessage;
 				subscriberMessage = JSON.parse(message);
 				
                                 resolve(1);
-                                  console.log("insde");
+                                  
                                 })
                                   });
-                                console.log(p1);
+                                
                                 var sagaComplete = await Promise.all([p1]);
 console.log(subscriberMessage.clientId);
 				var jsonMessage={
@@ -81,6 +81,7 @@ console.log(jsonMessage);
                 });
         }catch(err){
        //     return res.status(500).send("There is a problem in Creating DeviceId Collection"+" "+err);
+	console.log(err);
         }
     },
 
@@ -107,7 +108,7 @@ console.log(inComingMessage);
                         if((response.statusCode === config.successCode)){ //if Actuator Node Added Successfuly
                          //   callBack(null,inConnId,response.statusCode); 
 			console.log("adddddddddd");
-                            var jsonMessage={
+                            let jsonMessage={
                                 "action":"ADD_DEVICE",
                                 "deviceId":inComingMessage.deviceId,
                                 "connectionId":inComingMessage.connectionId,
@@ -159,7 +160,7 @@ console.log(inComingMessage);
                         return;
                     }
                     if((response.statusCode === config.successCode) && (JSON.parse(body).nModified === 1)){   //if device connection id updated successfully
-                         var jsonMessage={
+                         let jsonMessage={
                                 "action":"DEVICE_RESTART",
                                 "deviceId":inComingMessage.deviceId,
                                 "connectionId":inComingMessage.connectionId
@@ -198,16 +199,16 @@ console.log(inComingMessage);
                                     return;
                                 }else if(response.statusCode === config.successCode){
                                     
-									var jsonMessage={
+									let jsonMessage={
                  "action":"DEVICE_RESTART",
                  "deviceId":inComingMessage.deviceId,
                  "connectionId":inComingMessage.connectionId,
-			   	"clientId":JSON.parse(body).clientId
+	         "clientId":JSON.parse(body).clientId
                             }
 		  publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
 									 const saveResult= await SET_ASYNC(searchTerm,JSON.stringify(JSON.parse(body).clientId),'EX',5);
 						console.log('new data cached',saveResult)
-                                    callBack(null,inConnId,jsonMessage) 
+                                    //callBack(null,inConnId,jsonMessage) 
                                     return;
                                 }else{
                                     mailObj.sendMail("DB Eror ocured while getting device's Client Id"+" "+inComingMessage.deviceId);
