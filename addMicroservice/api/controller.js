@@ -1,16 +1,16 @@
 'use strict';
 
-var properties = require('../package.json')
-var distance = require('../service/distance'); 
+var properties = require("../package.json")
+var distance = require("../service/distance"); 
 var Request = require("request"); //Request is a simplified HTTP client, used to call Rest API's
-const axios= require('axios');
-const redis= require('redis');
-const config = require('./config');
-const mailObj = require('./mail');
-const {promisify}= require("util")
-const publisher = redis.createClient()
-const subscriber = redis.createClient()
-subscriber.subscribe("add_device3")
+const axios= require("axios");
+const redis= require("redis");
+const config = require("./config");
+const mailObj = require("./mail");
+const {promisify}= require("util");
+const publisher = redis.createClient();
+const subscriber = redis.createClient();
+subscriber.subscribe("add_device3");
 const client= redis.createClient({
     host:"127.0.0.1",
     port: 6379,
@@ -94,13 +94,12 @@ console.log(inComingMessage);
                     "deviceId":inComingMessage.deviceId,
                     "clientId" :inComingMessage.clientId,
 		    "connId": inComingMessage.connectionId
-                    
-                })
+                    })
                 }, (error, response, body) => {
                     try{
                         if(error) {
                        //     mailObj.sendMail("Device Id"+" "+inComingMessage.deviceId+" "+"Error Occured While Adding sensor states to collection"+error);
-console.log("11");
+
                             return;
                         }
 			console.log(response.statusCode);
@@ -119,7 +118,7 @@ console.log("11");
                             return;
                         }else{
                            // callBack(null,inConnId,response.statusCode); 
-console.log("66");
+
                             return;
                         }
                     }catch(err){
@@ -130,7 +129,7 @@ console.log("66");
                 });
         }catch(err){
           //  return res.status(500).send("There is a problem in Creating DeviceId Collection"+" "+err);
-console.log("55");
+
         }
     },
 
