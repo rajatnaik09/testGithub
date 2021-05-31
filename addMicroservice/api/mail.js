@@ -15,19 +15,19 @@ module.exports={
 sendMail:function(msg){
 
   var transporter = nodemailer.createTransport({
-      host: 'smtp.zoho.in',
+      host: "smtp.zoho.in",
       port: 465,
       secure: true, // use SSL
       auth: {
-          user: 'smws@project.ortusolis.com',
-          pass: 'Smws#node@20'
+          user: "smws@project.ortusolis.com",
+          pass: "Smws#node@20"
       }
   });
 
   // setup e-mail data, even with unicode symbols
   var mailOptions = {
-      from: 'smws@project.ortusolis.com', // sender address (who sends)
-      to: 'rajat.naik@ortusolis.com', // list of receivers (who receives)
+      from: "smws@project.ortusolis.com", // sender address (who sends)
+      to: "rajat.naik@ortusolis.com", // list of receivers (who receives)
       subject: 'Websocket Server/Gateway Device Error Message', // Subject line
       text: "msg", // plaintext body
       html: '<p>'+msg+'</p>' // html body
