@@ -14,7 +14,7 @@ subscriber.subscribe("add_device3");
 const client= redis.createClient({
     host:"127.0.0.1",
     port: 6379,
-})
+});
 const GET_ASYNC = promisify(client.get).bind(client);
 const SET_ASYNC = promisify(client.set).bind(client);
 
@@ -41,7 +41,10 @@ var subscriberMessage;
                         }
                         if((response.statusCode === config.successCode) && (JSON.parse(body).nModified === 1)){ //if Actuator Node Added Successfuly
                          //   callBack(null,inConnId,response.statusCode); 
-                            publisher.publish("add_device2", Message);
+                            let Message={
+						"deviceId":inComingMessage.deviceId
+					    }
+                            publisher.publish("add_device2", JSON.stringify(Message));
                             let p1 = new Promise((resolve, reject) => {
                                 subscriber.on("message", (channel, message) => {
                                   console.log("Received data :" + message)
@@ -103,18 +106,17 @@ console.log(inComingMessage);
 
                             return;
                         }
-			console.log(response.statusCode);
-			console.log(config.successCode);
+			
                         if((response.statusCode === config.successCode)){ //if Actuator Node Added Successfuly
                          //   callBack(null,inConnId,response.statusCode); 
-			console.log("adddddddddd");
+			
                             let jsonMessage={
                                 "action":"ADD_DEVICE",
                                 "deviceId":inComingMessage.deviceId,
                                 "connectionId":inComingMessage.connectionId,
 				"clientId":inComingMessage.clientId,
 				"userClientId": inComingMessage.userClientId
-                            }
+                            };
                             publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
                             return;
                         }else{
@@ -168,7 +170,7 @@ console.log(inComingMessage);
 				 publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
                     }else if((response.statusCode === config.successCode) && (JSON.parse(body).nModified === 0)){  //  get device's client id and send back to device as response
 			const searchTerm = inComingMessage.deviceId;
-    console.log(searchTerm);
+   
     const reply = await GET_ASYNC(searchTerm);
     if(reply) {
         console.log("using cached data");

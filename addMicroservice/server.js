@@ -14,7 +14,7 @@ subscriber1.on("message", (channel, message) => {
     console.log("Received data :" + message);
 let incomingMessage=JSON.parse(message);
                 
-let inAction=incoming_message.action;
+let inAction=incomingMessage.action;
 
 switch(inAction)
  {
