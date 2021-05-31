@@ -1,19 +1,18 @@
 'use strict';
 
 var properties = require('../package.json')
-var distance = require('../service/distance');
-const WifiReg_DeviceList=require('../models/DeviceList.model'); 
+var distance = require('../service/distance'); 
 var Request = require("request"); //Request is a simplified HTTP client, used to call Rest API's
 const axios= require('axios');
 const redis= require('redis');
 const config = require('./config');
 const mailObj = require('./mail');
-const {promisify}= require('util')
+const {promisify}= require("util")
 const publisher = redis.createClient()
 const subscriber = redis.createClient()
 subscriber.subscribe("add_device3")
 const client= redis.createClient({
-    host:'127.0.0.1',
+    host:"127.0.0.1",
     port: 6379,
 })
 const GET_ASYNC = promisify(client.get).bind(client);
