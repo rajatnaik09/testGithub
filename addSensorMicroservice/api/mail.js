@@ -41,7 +41,7 @@ sendMail:function(msg){
       }
 
       console.log("Message sent: " + info.response);
-      return
+      return;
   });
   return;
   }
