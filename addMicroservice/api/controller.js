@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var properties = require("../package.json");
 var distance = require("../service/distance"); 
@@ -43,16 +43,16 @@ var subscriberMessage;
                          //   callBack(null,inConnId,response.statusCode); 
                             let Message={
 						"deviceId":inComingMessage.deviceId
-					    }
+					    };
                             publisher.publish("add_device2", JSON.stringify(Message));
                             let p1 = new Promise((resolve, reject) => {
                                 subscriber.on("message", (channel, message) => {
-                                  console.log("Received data :" + message)
+                                  console.log("Received data :" + message);
 				subscriberMessage = JSON.parse(message);
 				
                                 resolve(1);
                                   
-                                })
+                                });
                                   });
                                 
                                 var sagaComplete = await Promise.all([p1]);
@@ -63,7 +63,7 @@ console.log(subscriberMessage.clientId);
 				"connectionId":inComingMessage.connectionId,
 				"userClientId": inComingMessage.userClientId
 				
-				}
+				};
 console.log(jsonMessage);
                                 controllers.insertDeviceDetailsInCollection(jsonMessage);
                                  //res.send('we are on home');
@@ -166,7 +166,7 @@ console.log(inComingMessage);
                                 "action":"DEVICE_RESTART",
                                 "deviceId":inComingMessage.deviceId,
                                 "connectionId":inComingMessage.connectionId
-				 }
+				 };
 				 publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
                     }else if((response.statusCode === config.successCode) && (JSON.parse(body).nModified === 0)){  //  get device's client id and send back to device as response
 			const searchTerm = inComingMessage.deviceId;
@@ -179,7 +179,7 @@ console.log(inComingMessage);
                  "deviceId":inComingMessage.deviceId,
                  "connectionId":inComingMessage.connectionId,
 			   	"clientId":JSON.parse(reply)
-                            }
+                            };
 		  publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
        // res.send(JSON.parse(reply));
         return;
@@ -206,10 +206,10 @@ console.log(inComingMessage);
                  "deviceId":inComingMessage.deviceId,
                  "connectionId":inComingMessage.connectionId,
 	         "clientId":JSON.parse(body).clientId
-                            }
+                            };
 		  publisher.publish("device_wsServer", JSON.stringify(jsonMessage));
 									 const saveResult= await SET_ASYNC(searchTerm,JSON.stringify(JSON.parse(body).clientId),'EX',5);
-						console.log("new data cached",saveResult)
+						console.log("new data cached",saveResult);
                                     //callBack(null,inConnId,jsonMessage) 
                                     return;
                                 }else{
